@@ -1,12 +1,15 @@
-# Dissertate: a Pandoc+LaTeX template for your dissertation
+# Dissertation template
 
+This Pandoc+LaTeX template is adapted from [dissertate](https://github.com/suchow/dissertate/blob/master/).
 This repository provides the files needed to support production and typesetting of a PhD dissertation. You write in [Pandoc](http://johnmacfarlane.net/pandoc/) (a Markdown variant), sprinkle LaTeX wherever you see fit, and end up with a [beautiful pdf](https://github.com/suchow/dissertate/blob/master/dissertation.pdf?raw=true). You'll also get a Word file of each chapter for sharing with those unfamiliar with LaTeX. The code currently supports NYU, Harvard and Princeton, though it can easily be adapted to meet the requirements of other schools.
 
+
 # Getting started
-1. Install the default font, EB Garamond. The files are provided in `fonts/EB Garamond`.
-2. Pick your school. Edit line 30 of `dissertate.cls` so that it points to your university's package file (e.g., `packages/Harvard`).
+1. Install the default font, EB Garamond. The files are provided under `fonts/`.
+2. The DiDy color is set by default in `dissertate.cls` lines 190-191.
 3. Personalize the document by filling out your name and all the other info in the file `frontmatter/personalize.md`.
 4. Build your dissertation with `build.command`, located in the `scripts` directory (e.g., you can `cd` into the main directory and then run `./scripts/build.command`).
+
 
 # License
 

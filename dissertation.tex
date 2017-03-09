@@ -1,32 +1,44 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass{dissertate}
+
+\documentclass{Dissertate}
 
 \begin{document}
-	
+
 % the front matter
+\input{frontmatter/personalize}
+% \maketitle
+% \copyrightpage
+\justify
 \frontmatter
-\onehalfspacing
+\setstretch{\dnormalspacing}
+% \abstractpage
+% \tableofcontents
+% %\authorlist
+% \listoffigures
+% \dedicationpage
+% \acknowledgments
 
+% \doublespacing
 % include each chapter...
-\setcounter{chapter}{-1} % start chapter numbering at 0
-\include{chapters/derivatives/tex/introduction}
-\include{chapters/derivatives/tex/chapter1}
-\include{chapters/derivatives/tex/chapter2}
-\include{chapters/derivatives/tex/chapter3}
-\include{chapters/derivatives/tex/conclusion}
-\begin{appendices}
-	\include{chapters/derivatives/tex/appendixA}
-\end{appendices}
+\setcounter{chapter}{-1}  % start chapter numbering at 0
+\include{chapters/introduction}
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+\include{chapters/conclusion}
 
-\singlespacing
+\setstretch{\dnormalspacing}
 
 % the back matter
-\clearpage
-\bibliography{references}
-\addcontentsline{toc}{chapter}{References}
+\backmatter
 
-\include{endmatter/colophon}
+% \clearpage
+% \bibliography{references}
+% \addcontentsline{toc}{chapter}{References}
+% \bibliographystyle{apalike2}
+
+% \include{endmatter/colophon}
 
 \end{document}

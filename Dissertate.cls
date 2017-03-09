@@ -2,10 +2,11 @@
 %  @LaTeX-class-file{
 %     filename        = "Dissertate.cls",
 %     version         = "2.0",
-%     date            = "25 March 2014",
+%     date            = "09 March 2017",
 %     codetable       = "ISO/ASCII",
 %     keywords        = "LaTeX, Dissertate",
 %     supported       = "Send email to suchow@post.harvard.edu.",
+%     modified        = "last modified by ghattab@cebitec.uni-bielefeld.de",
 %     docstring       = "Class for a dissertation."
 % --------------------------------------------------------------------
 

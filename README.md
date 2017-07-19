@@ -1,6 +1,6 @@
 # Dissertation template
 
-This Pandoc+LaTeX template is adapted from [dissertate](https://github.com/suchow/dissertate/blob/master/).
+This Pandoc+LaTeX template is adapted from [dissertate](https://github.com/suchow/dissertate/).
 This repository provides the files needed to support production and typesetting of a PhD dissertation. You write in [Pandoc](http://johnmacfarlane.net/pandoc/) (a Markdown variant), sprinkle LaTeX wherever you see fit, and end up with a nice PDF. You'll also get a Word file of each chapter for sharing with those unfamiliar with LaTeX. The code currently supports NYU, Harvard and Princeton, though it can easily be adapted to meet the requirements of other schools.
 
 

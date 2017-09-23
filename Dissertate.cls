@@ -243,6 +243,8 @@
 	\scshape \noindent \small \copyright \small 2017 \hspace{3pt}-- \theauthor \\
 	\noindent all rights reserved.
 	\vspace*{\fill}
+	\vfill
+	\noindent Printed on non-ageing paper according to DIN-ISO 9706.
 	\newpage
 	\rm
 }

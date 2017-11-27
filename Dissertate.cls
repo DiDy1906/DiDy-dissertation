@@ -2,22 +2,69 @@
 %  @LaTeX-class-file{
 %     filename        = "Dissertate.cls",
 %     version         = "2.0",
-%     date            = "09 March 2017",
+%     date            = "21 March 2017",
 %     codetable       = "ISO/ASCII",
 %     keywords        = "LaTeX, Dissertate",
 %     supported       = "Send email to suchow@post.harvard.edu.",
-%     modified        = "last modified by ghattab@cebitec.uni-bielefeld.de",
 %     docstring       = "Class for a dissertation."
 % --------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{Dissertate}[2014/03/25 v2.0 Dissertate Class]
-\LoadClass[12pt, oneside, letterpaper]{book}
+\ProvidesClass{Dissertate}[2017/03/21 v2.1 Dissertate Class]
+\LoadClass[12pt, twoside, letterpaper, cleardoublepage=empty]{book}
 
 %
 % Options
 %
 \RequirePackage{etoolbox}
+\usepackage{eso-pic}
+\usepackage{emptypage}
+
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\usepackage{afterpage}
+\usepackage{sidecap}
+\usepackage{tikz}
+    \usetikzlibrary{decorations}
+    \usetikzlibrary{intersections}
+    \usetikzlibrary{trees}
+    \usetikzlibrary{calc}
+%    \usetikzlibrary{positioning}
+
+
+% We need layers to draw the block diagram
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\definecolor{cff0000}{RGB}{0,0,255}
+\definecolor{f}{RGB}{0,0,0}
+
+%\tikzset{main node/.style={circle,fill=blue!20,draw,minimum size=1cm,inner sep=0pt},}    
+  
+% UNITS
+\usepackage{siunitx}
+\sisetup{per=slash, load=abbr}
+
+    % GRAPHICS
+\usepackage{pgfplots}
+\usetikzlibrary{arrows.new}
+\usetikzlibrary{fadings}
+\usepgfplotslibrary{units}
+\pgfplotsset{width=8cm, compat=1.3}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{mathrsfs}
+\usepackage{hhline}
+
+% Fix macro spacing bug
+\addtolength{\parskip}{-0.5mm}
+\setlength{\textfloatsep}{0.1cm}
+
+
 
 % Line spacing: dsingle/ddouble
 %   Whether to use single- or doublespacing.
@@ -37,7 +84,7 @@
     \newcommand{\dnormalspacing}{1.2}
     \newcommand{\dcompressedspacing}{1.0}
 }{
-    \newcommand{\dnormalspacing}{2.0}
+    \newcommand{\dnormalspacing}{1.2}
     \newcommand{\dcompressedspacing}{1.2}
 }
 
@@ -63,42 +110,63 @@
     {\endoldenumerate\end{spacing}}
 
 % Text layout.
-\RequirePackage[width=5.75in, letterpaper]{geometry}
+\RequirePackage{mdframed}
+\RequirePackage[width=6.1in, letterpaper]{geometry} % 5.75in
 \usepackage{ragged2e}
 \RaggedRight
+%\RequirePackage{pdfpages}
 \RequirePackage{graphicx}
 \usepackage{fixltx2e}
 \parindent 12pt
 \RequirePackage{lettrine}
 \RequirePackage{setspace}
 \RequirePackage{verbatim}
+\RequirePackage{placeins}
 
 % Fonts.
+\usepackage{amsmath}
 \RequirePackage{color}
 \RequirePackage{xcolor}
-\usepackage{hyperref}
+\usepackage{hyperref} 
+\RequirePackage[toc, acronyms, automake]{glossaries-extra}
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
 \RequirePackage{url}
+\newcommand{\vars}{\texttt}
+\newcommand{\func}{\textrm}
 \RequirePackage{amssymb}
 \RequirePackage{mathspec}
-\setmathsfont(Digits,Latin,Greek)[Numbers={Proportional}]{EB Garamond}
-\setmathrm{EB Garamond}
+\usepackage{xfrac}
+\RequirePackage{mathrsfs, esint}
+\usepackage{parskip}
+\usepackage{balance}
+\usepackage{floatrow}
+\usepackage{multirow}
+\usepackage{etoolbox}
+\setlength{\parindent}{15pt}
+\usepackage{xspace}
+\usepackage{stackengine}
+
+%\setmathsfont(Digits,Latin,Greek)[Numbers={Proportional}]{EB Garamond}
+%\setmathrm{EB Garamond}
 \AtBeginEnvironment{tabular}{\addfontfeature{RawFeature=+tnum}}
 \widowpenalty=300
 \clubpenalty=300
-\setromanfont[Numbers=OldStyle, Ligatures={Common, TeX}, Scale=1.0]{EB Garamond}
+%\setromanfont[Numbers=OldStyle,Ligatures={Common, TeX}, Scale=1.0]{EB Garamond}
 \newfontfamily{\smallcaps}[RawFeature={+c2sc,+scmp}]{EB Garamond}
-\setsansfont[Scale=MatchLowercase, BoldFont={Lato Bold}]{Lato Regular}
+\setsansfont[Scale=MatchLowercase, BoldFont={Lato Bold}]{Lato Regular}% Regular
 \setmonofont[Scale=MatchLowercase]{Source Code Pro}
-\RequirePackage[labelfont={bf,sf,footnotesize,singlespacing},
-                textfont={sf,footnotesize,singlespacing},
-                justification={justified,RaggedRight},
+\usepackage[labelfont={bf, footnotesize, singlespacing},
+                textfont={footnotesize, singlespacing},
+                justification={justified},
                 singlelinecheck=false,
                 margin=0pt,
                 figurewithin=chapter,
-                tablewithin=chapter]{caption}
+                tablewithin=chapter,
+                tableposition=top]{caption}
+\usepackage{subcaption}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \RequirePackage{microtype}
-
+\usepackage{adjustbox}
 
 % Headings and headers.
 \RequirePackage{fancyhdr}
@@ -187,21 +255,18 @@
 
 % School color found from university's graphic identity site:
 % http://isites.harvard.edu/icb/icb.do?keyword=k75408&pageid=icb.page392732
-\definecolor{SchoolColor}{RGB}{206, 17, 38} % Crimson
-\definecolor{chaptergrey}{RGB}{206, 17, 38} % for chapter numbers
+\definecolor{SchoolColor}{rgb}{0, 0, 0} % black
+\definecolor{chaptergrey}{rgb}{0.5, 0.5, 0.5} % for chapter numbers
 
-% DiDy colors
 %{RGB}{206, 17, 38}
-
-% Default document colors
 %{rgb}{0.5, 0.5, 0.5} 
 
 \hypersetup{
     colorlinks,
-    citecolor=SchoolColor,
+    citecolor=gray,
     filecolor=black,
     linkcolor=black,
-    urlcolor=SchoolColor,
+    urlcolor=gray,
 }
 
 % Formatting guidelines found in:
@@ -213,19 +278,20 @@
 	\abstractpage
 	\tableofcontents
 	% \listoffigures % optional
+	\authorlist
 	\dedicationpage
+	\clearpage
 	\acknowledgments
 }
 
 \renewcommand{\maketitle}{
-	\thispagestyle{empty}
 	\vspace*{\fill}
-	\vspace{100pt}
+%	\vspace{100pt}
 	\begin{center}
 	\Huge \textcolor{SchoolColor}{\thetitle} \normalsize \\
 	\vspace{100pt}
-	\textsc{a dissertation presented \\ by\\
-	\theauthor\\ to\\ The \@department\\ Faculty of Technology\\
+	\textsc{a dissertation submitted \\ by\\
+	\theauthor\\ to the \@department\\ Faculty of Technology\\
 	\vspace{12pt}
 	in partial fulfillment of the requirements\\
 	for the degree of\\ \@degree\\
@@ -237,7 +303,7 @@
 }
 
 \newcommand{\copyrightpage}{
-	\newpage
+	\cleardoublepage
 	\thispagestyle{empty}
 	\vspace*{\fill}
 	\scshape \noindent \small \copyright \small 2017 \hspace{3pt}-- \theauthor \\
@@ -250,25 +316,38 @@
 }
 
 \newcommand{\abstractpage}{
+	\cleardoublepage
 	\newpage
 	\pagenumbering{roman}
 	\setcounter{page}{3}
 	\pagestyle{fancy}
-	\lhead{Thesis advisor: Professor \@advisor} \rhead{\@author}
+	\lhead{Thesis advisor: apl. Prof. Dr.-Ing. \@advisor \\Thesis co-advisor: Prof. Dr. \@coadvisorOne}
+	\rhead{\@author}
+	
 	\renewcommand{\headrulewidth}{0.0pt}
-	\vspace*{35pt}
 	\begin{center}
-	\Large \textcolor{SchoolColor}{\@title} \normalsize \\
-	\vspace*{20pt}
+	\vspace*{35pt}
+%	\Large \textcolor{white}{\@title} 
+	\normalsize
 	\scshape Abstract \\ \rm
 	\end{center}
-	\input{frontmatter/abstract}
 	\vspace*{\fill}
+	\input{frontmatter/abstract}
 	\newpage \lhead{} \rhead{}
 	\cfoot{\thepage}
+	\cleardoublepage
+}
+
+
+\newcommand{\authorlist}{
+	\cleardoublepage 
+	\newpage \thispagestyle{fancy} \vspace*{\fill}
+	\scshape \noindent \input{frontmatter/authorlist}
+	\vspace*{\fill} \newpage \rm
 }
 
 \newcommand{\dedicationpage}{
+	\cleardoublepage 
 	\newpage \thispagestyle{fancy} \vspace*{\fill}
 	\scshape \noindent \input{frontmatter/dedication}
 	\vspace*{\fill} \newpage \rm
@@ -278,20 +357,29 @@
 	\chapter*{Acknowledgments}
 	\noindent
 	\input{frontmatter/thanks}
-	\vspace*{\fill} \newpage
+	\vspace*{\fill} \newpage \thispagestyle{empty} \mbox{} \newpage \thispagestyle{empty}
 	\setcounter{page}{1}
 	\pagenumbering{arabic}
 }
 
 
 \renewcommand{\backmatter}{
+    % Appendix A
     \begin{appendices}
         \include{chapters/appendixA}
+     	\include{chapters/appendixD}
+       	\include{chapters/appendixB}
+        \include{chapters/appendixC}
     \end{appendices}
+    \clearpage
+    % Acronyms and Glossary
     \input{endmatter/personalize}
     \clearpage
+    % References
     \bibliography{references}
     \addcontentsline{toc}{chapter}{References}
-    \bibliographystyle{apalike2}
-    \include{endmatter/colophon}
+    \bibliographystyle{unsrt}%apalike2}
+    \clearpage
+    % Colophon
+%    \include{endmatter/colophon}
 }
